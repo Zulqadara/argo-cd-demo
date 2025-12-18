@@ -1,4 +1,4 @@
-ArgoCD Demo
+# ArgoCD Demo
 
 This repo consists of the ArgoCD Config file and sample K8s yaml files that we will use to test our ArgoCD solution.
 We will use these files to setup our ArgoCD Operator and test deployment to our K8s cluster using the sample K8s yaml files.
@@ -11,5 +11,5 @@ Fell free to pull these images to test your pipeline/demo.
 
 
 P.s. Dont forget to make your namespace:
-# kubectl create ns dev
-# kubectl create ns prod
+*# kubectl create ns dev*
+*# kubectl create ns prod*
