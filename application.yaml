@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1 #Refer to https://argo-cd.readthedocs.io/en to see any version changes
+kind: Application
+metadata:
+  name: argocd-demo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Zulqadara/argo-cd-demo.git
+    targetRevision: HEAD # Means the latest commit on the default branch
+    path: dev # Path to the directory containing Kubernetes manifests
+  destination:
+    server: https://kubernetes.default.svc # Points to the locally hosted cluster (in my case minikube), you can use external clusters by providing their API server URL
+    namespace: my-demoapp-namespace # Namespace where the application resources will be deployed
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true # Automatically create the destination namespace if it doesn't exist
+    automated:
+      prune: true # Automatically delete resources that are no longer defined in the source, it will delelte the resource in the cluster too, so beware of that
+      selfHeal: true # Automatically revert any out-of-sync changes made to the live resources, the application.yaml will be the single source of truth if kubectl apply was used manually
